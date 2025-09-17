@@ -1,0 +1,48 @@
+[project]
+name = "mads-siads-696-fall-2025-birds-at-risk"
+version = "0.1.0"
+description = "MADS SIADS 696: Milestone II - Predicting At Risk Bird Populations"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "altair>=5.5.0",
+    "pandas>=2.3.2",
+    "pydantic-settings>=2.10.1",
+    "python-dotenv>=1.1.1",
+    "scikit-learn>=1.7.2",
+    "statsmodels>=0.14.5",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.30.1",
+    "jupyterlab>=4.4.7",
+    "pytest>=8.4.2",
+    "pytest-cov>=7.0.0",
+    "pytest-ruff>=0.5",
+    "ruff>=0.13.0",
+]
+
+[tool.ruff]
+extend-include = ["*.ipynb"]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".ipynb_checkpoints",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist"
+]
+
+line-length = 120
+indent-width = 4
+target-version = "py313"
