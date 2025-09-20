@@ -49,6 +49,7 @@
 				"ms-toolsai.datawrangler",
 				"ms-azuretools.vscode-docker",
 				"donjayamanne.python-environment-manager",
+				"mechatroner.rainbow-csv",
 				"github.copilot",
 				"skellock.just",
 				"charliermarsh.ruff"
