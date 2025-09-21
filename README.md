@@ -47,11 +47,17 @@ direnv allow
 ```
 Run this once per shell. If .env changes, you’ll be prompted to re-run the command.
 
+Note: If you are using a windows pc and WSL, you may need to run the following for the direnv file to be valid:
+```
+sudo apt install dos2unix
+dos2unix .envrc
+```
+
 ## Dowload source datasets
 To fetch the raw datasets needed for the project, simply run:
 
 ```sh
-just dowload-source-data
+just download-source-data
 ```
 This ensures that all required input data is available in the expected directories.
 
