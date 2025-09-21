@@ -1,0 +1,17 @@
+name: Code Quality Checks
+
+on:
+  push
+
+jobs:
+  quality-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Just
+        uses: extractions/setup-just@v2
+
+      - name: Run quality checks
+        run: just code-quality

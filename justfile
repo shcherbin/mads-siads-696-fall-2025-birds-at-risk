@@ -37,3 +37,7 @@ _confirm-upload:
 extract-nabbp-file-index:
 	@echo "Extracting NABBp file index data from readme file..."
 	python src/birds/extract_nabbp_index_data.py
+
+
+code-quality:
+	ruff check src tests

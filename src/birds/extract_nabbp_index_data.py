@@ -1,5 +1,4 @@
 import pandas as pd
-import re
 
 def convert_readme_to_csv(input_file, output_file):
     """
