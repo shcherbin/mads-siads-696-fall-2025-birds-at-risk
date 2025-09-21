@@ -40,4 +40,4 @@ extract-nabbp-file-index:
 
 
 code-quality:
-	ruff check src tests
+	ruff check src tests notebooks
