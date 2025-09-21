@@ -13,6 +13,9 @@ jobs:
       - name: Install Just
         uses: extractions/setup-just@v2
 
+      - name: Install direnv
+        run: sudo apt-get update && sudo apt-get install -y direnv
+
       - name: Run quality checks
         shell: bash
         run: |
