@@ -52,6 +52,10 @@ Note: If you are using a windows pc and WSL, you may need to run the following f
 sudo apt install dos2unix
 dos2unix .envrc
 ```
+If using windows, you may also want to do the following to ensure consistent spacing in proceeding pr's:
+```
+git config --global core.autocrlf input
+```
 
 ## Dowload source datasets
 To fetch the raw datasets needed for the project, simply run:
