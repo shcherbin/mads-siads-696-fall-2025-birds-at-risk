@@ -14,4 +14,8 @@ jobs:
         uses: extractions/setup-just@v2
 
       - name: Run quality checks
-        run: just code-quality
+        shell: bash
+        run: |
+          cp .env.example .env
+          direnv allow
+          just code-quality
