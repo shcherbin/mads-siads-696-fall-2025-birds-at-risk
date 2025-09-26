@@ -46,8 +46,11 @@ class DataTables:
 
     @property
     def species_index(self) -> pd.DataFrame:
+        """Loads the species index CSV file which maps species to NABBP file IDs.
+        """
         if self.__species_df is None:
-            self.__species_df = pd.read_csv(os.path.join(self.__settings.augmented_data_base_path, 'nabbp_file_species_index.csv'), header=0)
+            index_path = os.path.join(self.__settings.augmented_data_base_path, 'nabbp_file_species_index.csv')
+            self.__species_df = pd.read_csv(index_path, header=0)
         return self.__species_df
 
     def load_data_by_species_names(self, names: list[str], columns: list[str] = None, 
