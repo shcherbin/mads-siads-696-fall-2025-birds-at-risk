@@ -1,7 +1,87 @@
 import os
 import pandas as pd
+import polars as pl
 
+from typing import Union
 from birds.settings import load_settings
+
+
+
+class DataTables:
+    SCHEMA = pl.Schema({
+        'band': pl.Utf8,
+        'original_band': pl.Utf8, 
+        'other_bands': pl.Utf8,
+        'event_type': pl.Utf8,
+        'event_date': pl.Utf8,
+        'event_day': pl.Int32,
+        'event_month': pl.Int32,
+        'event_year': pl.Int32,
+        'iso_country': pl.Utf8,
+        'iso_subdivision': pl.Utf8,
+        'lat_dd': pl.Float64,
+        'lon_dd': pl.Float64,
+        'coordinates_precision_code': pl.Utf8,
+        'band_type_code': pl.Utf8,
+        'species_name': pl.Utf8,
+        'species_id': pl.Int32,
+        'bird_status': pl.Utf8,
+        'extra_info_code': pl.Utf8,
+        'age_code': pl.Utf8,
+        'sex_code': pl.Utf8,
+        'permit': pl.Utf8,
+        'band_status_code': pl.Utf8,
+        'how_obtained_code': pl.Utf8,
+        'who_obtained_code': pl.Utf8,
+        'reporting_method': pl.Utf8,
+        'present_condition': pl.Utf8,
+        'min_age_at_enc': pl.Float64,
+        'record_source': pl.Utf8,
+        'record_id': pl.Utf8
+    })
+
+    def __init__(self):
+        self.__settings = load_settings()
+        self.__species_df = None
+
+    @property
+    def species_index(self) -> pd.DataFrame:
+        """Loads the species index CSV file which maps species to NABBP file IDs.
+        """
+        if self.__species_df is None:
+            index_path = os.path.join(self.__settings.augmented_data_base_path, 'nabbp_file_species_index.csv')
+            self.__species_df = pd.read_csv(index_path, header=0)
+        return self.__species_df
+
+    def load_data_by_species_names(self, names: list[str], columns: list[str] = None, 
+                                   materialize: bool = False) -> Union[pl.LazyFrame, pl.DataFrame]:
+        """Selects the appropriate NABBP data files based on species names and loads the data.
+        """
+        species_df = self.species_index[self.species_index['SPECIES_NAME'].isin(names)]
+
+        species_ids = species_df['species_id'].unique().tolist()
+        file_paths = [
+            os.path.join(self.__settings.nabbp_data_path, f"NABBP_2025_grp{suffix}.csv.gz")
+            for suffix in species_df['grp_table_suffix'].unique().tolist()
+        ]
+        
+        print(f"Species IDs: {species_ids}")
+        print("Loading data from files:")
+        for path in file_paths:
+            print(f"\t - {path}")
+
+        lazy_frame = (
+             pl.scan_csv(source=file_paths, low_memory=True, schema=self.SCHEMA)
+                .filter(pl.col('species_id').is_in(species_ids))
+        )
+
+        if columns is not None:
+            lazy_frame = lazy_frame.select(columns)
+
+        if materialize:
+            return lazy_frame.collect().to_pandas()
+        
+        return lazy_frame
 
 
 class LookupTables:
