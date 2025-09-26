@@ -14,6 +14,10 @@ class Settings(BaseSettings):
     env: str
     version: str
 
+    augmented_data_base_path: str = (
+        '/workspaces/mads-siads-696-fall-2025-birds-at-risk/notebooks/data/augmented_data'
+    )
+
     nabbp_base_path: str = (
         '/workspaces/mads-siads-696-fall-2025-birds-at-risk/notebooks/data/source_data/NABBP-2025'
     )
