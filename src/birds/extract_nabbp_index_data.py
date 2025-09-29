@@ -47,6 +47,7 @@ def convert_readme_to_csv(input_file, output_file):
     # Create DataFrame
     df = pd.DataFrame(data_lines, columns=['grp_table', 'species_id', 'ALPHA_CODE', 'SPECIES_NAME', 'SCI_NAME', 'count'])
     
+    df['grp_table_suffix'] = df['grp_table']
     df['grp_table'] = df['grp_table'].str.replace('_', '', regex=False)
     df['count'] = df['count'].str.replace(r'[(),]', '', regex=True)    
     df['grp_table'] = pd.to_numeric(df['grp_table'], errors='coerce')

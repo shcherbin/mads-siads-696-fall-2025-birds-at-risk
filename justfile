@@ -20,7 +20,7 @@ upload-source-data-dryrun:
 
 upload-source-data:
 	@echo "\n\ndoing dry run of upload for confirmation of files to be uploaded"
-	aws s3 sync --dryrun notebooks/data s3://$AWS_S3_BUCKET/
+	aws s3 sync --dryrun notebooks/data s3://$AWS_S3_BUCKET/ --exclude ".*" --exclude "*/.*"
 	@just _confirm-upload
 
 _confirm-upload:
@@ -28,7 +28,7 @@ _confirm-upload:
 	read -p "Do you want to proceed with upload? (y/N): " confirm
 	if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
 	    echo "syncing data to s3..."
-	    aws s3 sync notebooks/data s3://$AWS_S3_BUCKET/
+	    aws s3 sync notebooks/data s3://$AWS_S3_BUCKET/ --exclude ".*" --exclude "*/.*"
 	else
 	    echo "exiting without upload"
 	fi
