@@ -2,7 +2,8 @@
 ## counting the number of encounters, the days between first and last encounter,
 ## and the distance between the first and last encounter
 
-import os, glob
+import os
+import glob
 import polars as pl
 from birds.settings import load_settings, get_relative_path
 
