@@ -22,6 +22,10 @@ class Settings(BaseSettings):
         '/workspaces/mads-siads-696-fall-2025-birds-at-risk/notebooks/data/source_data/NABBP-2025'
     )
 
+    redlist_species_data_path: str = (
+        '/workspaces/mads-siads-696-fall-2025-birds-at-risk/notebooks/data/source_data/redlist_species_data'
+    )
+
     @property
     def nabbp_lookups_path(self) -> str:
         return os.path.join(self.nabbp_base_path, 'NABBP_lookups_2025')
