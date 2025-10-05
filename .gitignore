@@ -13,3 +13,6 @@ wheels/
 .ruff_cache/
 .coverage
 notebooks/data
+
+# mac garbage
+.DS_Store
