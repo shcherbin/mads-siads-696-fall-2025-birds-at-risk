@@ -35,6 +35,10 @@ class Settings(BaseSettings):
     redlist_species_data_path: str = (
         '/workspaces/mads-siads-696-fall-2025-birds-at-risk/notebooks/data/source_data/redlist_species_data'
     )
+    
+    avonet_base_path: str = (
+        '/workspaces/mads-siads-696-fall-2025-birds-at-risk/notebooks/data/source_data/ELEData/'
+    )
 
     @property
     def nabbp_lookups_path(self) -> str:
