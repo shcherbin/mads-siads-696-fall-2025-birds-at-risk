@@ -36,6 +36,11 @@ class Settings(BaseSettings):
         '/workspaces/mads-siads-696-fall-2025-birds-at-risk/notebooks/data/source_data/redlist_species_data'
     )
 
+    # added data model storage path
+    model_path: str = (
+        '/workspaces/mads-siads-696-fall-2025-birds-at-risk/notebooks/data/models'
+    )
+
     @property
     def nabbp_lookups_path(self) -> str:
         return os.path.join(self.nabbp_base_path, 'NABBP_lookups_2025')
@@ -47,6 +52,10 @@ class Settings(BaseSettings):
     @property
     def augmented_band_agg(self) -> str:
         return os.path.join(self.augmented_data_base_path, 'band_agg')
+    
+    @property
+    def augmented_atrisk_events(self) -> str:
+        return os.path.join(self.augmented_data_base_path, 'at_risk_events')
 
 def load_settings() -> Settings:
     return Settings()
