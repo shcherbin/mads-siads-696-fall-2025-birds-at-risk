@@ -65,6 +65,7 @@ just download-source-data
 ```
 This ensures that all required input data is available in the expected directories.
 
+Contact Jason Harris for AWS S3 credentials if data access is required.
 
 ## Start the Development Environment
 With Docker Desktop running, open the repository in VS Code. You should see a prompt to “Reopen in Container”.
